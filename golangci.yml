@@ -1,0 +1,49 @@
+run:
+  timeout: 1m
+  tests: true
+  modules-download-mode: vendor
+  allow-parallel-runners: true
+  allow-serial-runners: true
+
+
+linters:
+  enable-all: true
+  disable:
+    - execinquery # Deprecated since v1.58.0.
+    - exportloopref # Deprecated since v1.60.2 (replaced copyloopvar).
+    - gomnd # Deprecated since v1.58.0 (replaced by mnd).
+    - err113 # Most errors cannot be determined statically.
+    - exhaustruct # Not fully exhaustive definitions of structure are normal.
+    - mnd # The developer knows best what numbers to put in the constant.
+    - varnamelen # It is convenient to use variables named with a single letter.
+    - wsl # There are a lot of weird rules around here.
+    - depguard # Настроить и включить позже.
+
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - prefix(github.com/LoskutovDaniil/OzonTestTask2024)
+      - default
+    custom-order: true
+    skip-generated: true
+
+  gomoddirectives:
+    replace-local: true
+
+  tagalign:
+    order:
+      - json
+      - yaml
+      - validate
+
+  testifylint:
+    enable-all: true
+
+issues:
+  exclude-rules:
+    - linters:
+        - lll
+      source: "^//go:generate "
+
+  exclude-generated: strict

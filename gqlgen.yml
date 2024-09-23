@@ -1,0 +1,34 @@
+skip_validation: true
+skip_mod_tidy: true
+omit_slice_element_pointers: true
+
+schema:
+  - internal/service/http/graphql/*.graphqls
+
+exec:
+  filename: internal/service/http/graphql/exec.gqlgen.go
+  package: graphql
+
+autobind:
+  - "github.com/LoskutovDaniil/OzonTestTask2024/internal/model"
+  - "github.com/LoskutovDaniil/OzonTestTask2024/internal/service/http/graphql"
+
+models:
+  Boolean:
+    model: github.com/99designs/gqlgen/graphql.Boolean
+  Int:
+    model:
+      - github.com/99designs/gqlgen/graphql.Int
+      - github.com/99designs/gqlgen/graphql.Int64
+      - github.com/99designs/gqlgen/graphql.Int32
+  Uint:
+    model:
+      - github.com/99designs/gqlgen/graphql.Uint
+      - github.com/99designs/gqlgen/graphql.Uint64
+      - github.com/99designs/gqlgen/graphql.Uint32
+  String:
+    model: github.com/99designs/gqlgen/graphql.String
+  Time:
+    model: github.com/99designs/gqlgen/graphql.Time
+  UUID:
+    model: github.com/99designs/gqlgen/graphql.UUID

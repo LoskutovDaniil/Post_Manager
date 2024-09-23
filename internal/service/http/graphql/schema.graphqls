@@ -1,0 +1,52 @@
+scalar Uint
+scalar Time
+scalar UUID
+
+input NewPost {
+    text: String!
+    disableComments: Boolean
+}
+
+type Post {
+    id: UUID!
+    createdAt: Time!
+    text: String!
+    disableComments: Boolean!
+}
+
+input PostsFilter {
+    limit: Uint
+    offset: Uint
+}
+
+input NewComment {
+    postId: UUID!
+    parentCommentId: UUID
+    text: String!
+}
+
+type Comment {
+    id: UUID!
+    postId: UUID!
+    parentCommentId: UUID
+    createdAt: Time!
+    text: String!
+    comments: [Comment!]
+}
+
+input CommentsFilter {
+    postId: UUID!
+    parentCommentId: UUID
+    depth: Uint
+}
+
+type Query {
+    post(id: UUID!): Post!
+    posts(input: PostsFilter): [Post!]!
+    comments(input: CommentsFilter): [Comment!]!
+}
+
+type Mutation {
+    createPost(input: NewPost!): Post!
+    createComment(input: NewComment!): Comment!
+}
